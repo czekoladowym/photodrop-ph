@@ -20,18 +20,8 @@ interface SignInFormData {
 }
 
 const SignIn = () => {
-  const [formData, setFormData] = useState<SignInFormData>({
-    login: "",
-    password: "",
-  });
-  const [errorMessage, setErrorMessage] = useState<string>("");
-
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const [trueLogin, setTrueLogin] = useState<string>("");
+  const [truePass, setTruePass] = useState<string>("");
 
   const handleFormSubmit = async (
     event: React.FormEvent<HTMLFormElement>
@@ -39,7 +29,10 @@ const SignIn = () => {
     event.preventDefault();
     const res = await axios.post(
       "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/sign-in",
-      formData
+      {
+        login: trueLogin,
+        password: truePass,
+      }
     );
     if (res.status === 200) {
       window.location.replace("/home");
@@ -59,22 +52,22 @@ const SignIn = () => {
           <RegInput
             type="text"
             placeholder="Enter your login..."
-            value={formData.login}
-            onChange={handleInputChange}
+            value={trueLogin}
+            onChange={(e) => setTrueLogin(e.target.value)}
             required={true}
           />
           <SubTitle>*Password:</SubTitle>
           <RegInput
             type="password"
             placeholder="Enter your password..."
-            value={formData.password}
-            onChange={handleInputChange}
+            value={truePass}
+            onChange={(e) => setTruePass(e.target.value)}
             required={true}
           />
+          <SubmitBtn type="submit" onClick={() => console.log("hello world")}>
+            Sign In
+          </SubmitBtn>
         </form>
-        <SubmitBtn type="submit" onClick={() => console.log("hello world")}>
-          Create account
-        </SubmitBtn>
       </MainSection>
     </>
   );
