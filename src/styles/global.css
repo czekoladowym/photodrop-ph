@@ -1,0 +1,72 @@
+@font-face {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/fonts/FuturaPTBook.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../assets/fonts/FuturaPTMedium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../assets/fonts/FuturaPTBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Futura PT";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../assets/fonts/FuturaPT-Demi.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "Termina";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../assets/fonts/TerminaBold.otf") format("opentype");
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Termina";
+  margin: 0;
+}
+
+p {
+  font-family: "Futura PT";
+  font-weight: 400;
+  margin: 0;
+}
+button {
+  font-family: "Futura PT";
+}
+
+input {
+  font-family: "Futura PT";
+  font-weight: 400;
+}
