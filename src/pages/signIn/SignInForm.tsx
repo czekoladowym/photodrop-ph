@@ -8,7 +8,7 @@ import {
   NonRequired,
   SubmitBtn,
   Desc,
-} from "./SignUpStyles";
+} from "./SignInStyles";
 import logo from "../../assets/img/main-logo.svg";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";

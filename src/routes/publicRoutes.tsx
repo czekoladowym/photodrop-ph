@@ -1,5 +1,5 @@
 import MainPage from "../pages/main/MainPage";
-import SignIn from "../pages/signUp/SignInForm";
+import SignIn from "../pages/signIn/SignInForm";
 
 export const publicRoutes = [
   {
