@@ -11,15 +11,15 @@ interface IPrors {
   password: string;
 }
 
-export const signIn =
-  ({ login, password }: IPrors) =>
-  async (dispatch) => {
-    const response = await instance.post(
-      "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/sign-in",
-      { login, password }
-    );
-    const { user, token, refreshToken } = response.data;
-    dispatch(setUser(user));
-    dispatch(setToken(token));
-    dispatch(setRefreshToken(refreshToken));
-  };
+// export const signIn =
+//   ({ login, password }: IPrors) =>
+//   async (dispatch) => {
+//     const response = await instance.post(
+//       "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/sign-in",
+//       { login, password }
+//     );
+//     const { user, token, refreshToken } = response.data;
+//     dispatch(setUser(user));
+//     dispatch(setToken(token));
+//     dispatch(setRefreshToken(refreshToken));
+//   };
