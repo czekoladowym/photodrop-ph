@@ -1,29 +1,100 @@
 import {
-  AlbumFieldStart,
-  AlbumFieldEnd,
+  AlbumDate,
+  AlbumField,
+  AlbumLoc,
+  AlbumName,
+  Albums,
+  DynamicIcon,
   Naming,
-  Icon,
-  LocName,
-  NameField,
+  StaticIcon,
+  StaticIconBg,
 } from "./AlbumStyle";
 
-const Album = () => (
-  <>
-    <AlbumFieldStart>
-      <Icon />
-      <NameField>
-        <Naming>Album name</Naming>
-        <LocName>Album location</LocName>
-      </NameField>
-    </AlbumFieldStart>
-    <AlbumFieldEnd>
-      <Icon />
-      <NameField>
-        <Naming>Album name 2</Naming>
-        <LocName>Album location 2</LocName>
-      </NameField>
-    </AlbumFieldEnd>
-  </>
-);
+import staticIcon from "/img/camera-folder-static.png";
+import dynamicIcon from "/img/camera-folder.gif";
+
+const Album = () => {
+  return (
+    <Albums>
+      <AlbumField>
+        <StaticIconBg className="static">
+          <StaticIcon className="static" src={staticIcon} />
+        </StaticIconBg>
+        <DynamicIcon className="active" src={dynamicIcon} />
+        <Naming>
+          <AlbumName>Hello World!</AlbumName>
+          <AlbumLoc>Borshagovka, Kiev</AlbumLoc>
+          <AlbumDate>20.03.2023</AlbumDate>
+        </Naming>
+      </AlbumField>
+      <AlbumField>
+        <StaticIconBg className="static">
+          <StaticIcon className="static" src={staticIcon} />
+        </StaticIconBg>
+        <DynamicIcon className="active" src={dynamicIcon} />
+        <Naming>
+          <AlbumName>Happy New Year</AlbumName>
+          <AlbumLoc>Salt-Lake-City, USA</AlbumLoc>
+          <AlbumDate>25.12.2020</AlbumDate>
+        </Naming>
+      </AlbumField>
+      <AlbumField>
+        <StaticIconBg className="static">
+          <StaticIcon className="static" src={staticIcon} />
+        </StaticIconBg>
+        <DynamicIcon className="active" src={dynamicIcon} />
+        <Naming>
+          <AlbumName>Uganda</AlbumName>
+          <AlbumLoc>Mukono, Uganda</AlbumLoc>
+          <AlbumDate>01.04.2016</AlbumDate>
+        </Naming>
+      </AlbumField>
+      <AlbumField>
+        <StaticIconBg className="static">
+          <StaticIcon className="static" src={staticIcon} />
+        </StaticIconBg>
+        <DynamicIcon className="active" src={dynamicIcon} />
+        <Naming>
+          <AlbumName>Basketball</AlbumName>
+          <AlbumLoc>New Jersey, USA</AlbumLoc>
+          <AlbumDate>14.09.2021</AlbumDate>
+        </Naming>
+      </AlbumField>
+      <AlbumField>
+        <StaticIconBg className="static">
+          <StaticIcon className="static" src={staticIcon} />
+        </StaticIconBg>
+        <DynamicIcon className="active" src={dynamicIcon} />
+        <Naming>
+          <AlbumName>Kendrick birthday</AlbumName>
+          <AlbumLoc>Cologne, Germany</AlbumLoc>
+          <AlbumDate>11.11.2001</AlbumDate>
+        </Naming>
+      </AlbumField>
+      <AlbumField>
+        <StaticIconBg className="static">
+          <StaticIcon className="static" src={staticIcon} />
+        </StaticIconBg>
+        <DynamicIcon className="active" src={dynamicIcon} />
+        <Naming>
+          <AlbumName>Ganjubas</AlbumName>
+          <AlbumLoc>Unknown, Unknown</AlbumLoc>
+          <AlbumDate>13.01.2006</AlbumDate>
+        </Naming>
+      </AlbumField>
+      <AlbumField>
+        <StaticIconBg className="static">
+          <StaticIcon className="static" src={staticIcon} />
+        </StaticIconBg>
+        <DynamicIcon className="active" src={dynamicIcon} />
+        <Naming>
+          <AlbumName>Крым 2010</AlbumName>
+          <AlbumLoc>Крым, Украина</AlbumLoc>
+          <AlbumDate>30.06.2010</AlbumDate>
+        </Naming>
+      </AlbumField>
+    </Albums>
+  );
+};
 
 export default Album;

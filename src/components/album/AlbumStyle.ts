@@ -1,30 +1,77 @@
 import styled from "styled-components";
 
-export const AlbumFieldStart = styled.div`
+export const AlbumField = styled.div`
+  position: relative;
   height: 90px;
-  width: 70%;
-  border: 1px solid black;
+  width: 35%;
+  border: 1.5px solid #939393;
+  border-radius: 15px;
   display: flex;
+  background-color: #fff;
 `;
-export const AlbumFieldEnd = styled(AlbumFieldStart)`
-  margin-top: 15px;
+export const Albums = styled.div`
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
 `;
 
-export const Icon = styled.img`
-  margin: 5px 10px;
-  height: 80px;
+export const StaticIconBg = styled.div`
+  margin-top: 2px;
+  margin-left: 8px;
+  display: flex;
+  position: absolute;
+  height: 83px;
   width: 80px;
-  background-color: yellow;
+  z-index: 2;
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
 `;
-export const NameField = styled.div`
+export const StaticIcon = styled.img`
+  height: 61px;
+  width: 64px;
+  background-color: #fff;
+`;
+
+export const DynamicIcon = styled(StaticIcon)`
+  top: 3px;
+  position: absolute;
+  width: 84px;
+  height: 81px;
+  left: 6.05px;
+  /* z-index: 3;
+  opacity: 0.4; */
+`;
+
+export const Naming = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
+  -webkit-box-align: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  position: relative;
 `;
 
-export const Naming = styled.h3`
-  margin: 10px;
-  text-decoration: underline;
+export const AlbumName = styled.p`
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: 600;
+  left: 115px;
 `;
-export const LocName = styled.h3`
-  margin: 10px;
+export const AlbumLoc = styled.p`
+  position: absolute;
+  font-size: 26px;
+  left: 115px;
+  bottom: 10px;
+`;
+export const AlbumDate = styled.p`
+  font-size: 22px;
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
 `;

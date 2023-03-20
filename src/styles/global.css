@@ -2,35 +2,35 @@
   font-family: "Futura PT";
   font-style: normal;
   font-weight: 400;
-  src: url("../assets/fonts/FuturaPTBook.otf") format("opentype");
+  src: url("/fonts/FuturaPTBook.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Futura PT";
   font-style: normal;
   font-weight: 500;
-  src: url("../assets/fonts/FuturaPTMedium.otf") format("opentype");
+  src: url("/fonts/FuturaPTMedium.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Futura PT";
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/FuturaPTBold.otf") format("opentype");
+  src: url("/fonts/FuturaPTBold.otf") format("opentype");
 }
 
 @font-face {
   font-family: "Futura PT";
   font-style: normal;
   font-weight: 600;
-  src: url("../assets/fonts/FuturaPT-Demi.ttf") format("opentype");
+  src: url("/fonts/FuturaPT-Demi.ttf") format("opentype");
 }
 
 @font-face {
   font-family: "Termina";
   font-style: normal;
   font-weight: 700;
-  src: url("../assets/fonts/TerminaBold.otf") format("opentype");
+  src: url("/fonts/TerminaBold.otf") format("opentype");
 }
 
 html {
@@ -69,4 +69,12 @@ button {
 input {
   font-family: "Futura PT";
   font-weight: 400;
+}
+.static {
+  position: absolute;
+  background: white;
+}
+
+.static:hover {
+  opacity: 0;
 }

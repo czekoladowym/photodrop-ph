@@ -9,7 +9,7 @@ import {
   SubmitBtn,
   Desc,
 } from "./SignInStyles";
-import logo from "../../assets/img/main-logo.svg";
+import logo from "/img/main-logo.svg";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { redirect } from "react-router-dom";
@@ -35,6 +35,7 @@ const SignIn = () => {
       }
     );
     if (res.status === 200) {
+      console.log(res.data);
       window.location.replace("/home");
     }
   };
