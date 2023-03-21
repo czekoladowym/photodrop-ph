@@ -3,30 +3,33 @@ import {
   Logo,
   AddAlbum,
   MainSection,
-  RightBanner,
-  LeftBanner,
   PlusIcon,
   PlusAlbum,
 } from "./MainPageStyles";
 import Album from "../../components/album/Album";
 import logo from "/img/main-logo.svg";
-import rightBanner from "/img/right-banner.svg";
-import leftBanner from "/img/left-banner.svg";
 import plusIcon from "/img/plus-icon.svg";
+import { useEffect, useState } from "react";
+import ModalAlbum from "../../components/addAlbum/ModalAlbum";
 
 const MainPage = () => {
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  const handleModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       <Header>
         <Logo src={logo} />
       </Header>
       <MainSection>
-        <RightBanner src={rightBanner} />
-        <LeftBanner src={leftBanner} />
-        <AddAlbum>
+        <AddAlbum onClick={() => setModalOpen(true)}>
           <PlusIcon src={plusIcon} />
           <PlusAlbum>Create new album</PlusAlbum>
         </AddAlbum>
+        <ModalAlbum active={modalOpen} close={() => setModalOpen(false)} />
         <Album />
       </MainSection>
     </>
