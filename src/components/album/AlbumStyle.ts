@@ -19,6 +19,7 @@ export const Albums = styled.div`
 `;
 
 export const StaticIconBg = styled.div`
+  cursor: pointer;
   margin-top: 2px;
   margin-left: 8px;
   display: flex;
@@ -31,12 +32,14 @@ export const StaticIconBg = styled.div`
   align-items: center;
 `;
 export const StaticIcon = styled.img`
+  cursor: pointer;
   height: 61px;
   width: 64px;
   background-color: #fff;
 `;
 
 export const DynamicIcon = styled(StaticIcon)`
+  cursor: pointer;
   top: 3px;
   position: absolute;
   width: 84px;

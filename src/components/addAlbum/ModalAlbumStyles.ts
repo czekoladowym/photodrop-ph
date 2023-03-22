@@ -25,7 +25,7 @@ export const Modal = styled.div`
 export const Card = styled.div`
   border: 1px solid #656565;
   border-radius: 30px;
-  height: 600px;
+  height: 540px;
   width: 400px;
   background-color: #fff;
   display: flex;
@@ -53,6 +53,12 @@ export const InputName = styled.p`
 `;
 export const InputLoc = styled(InputName)`
   margin-right: 185px;
+  margin-top: 20px;
+`;
+
+export const InputDate = styled(InputName)`
+  margin-right: 210px;
+  margin-top: 20px;
 `;
 
 export const Input = styled.input`
@@ -70,4 +76,23 @@ export const Input = styled.input`
   }
 `;
 
-export const SelectMenu = styled.div``;
+export const Btn = styled.input`
+  border: 1px solid rgb(82 92 243);
+  font-weight: 500;
+  font-family: "Termina";
+  font-size: 25px;
+  color: #fff;
+  border-radius: 20px;
+  background-color: black;
+  height: 65px;
+  width: 300px;
+  margin-top: 50px;
+  cursor: pointer;
+  :hover {
+    background-color: rgb(44 44 44);
+  }
+`;
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;

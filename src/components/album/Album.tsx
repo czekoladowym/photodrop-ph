@@ -1,3 +1,5 @@
+import { useState } from "react";
+import AddPhoto from "../addPhoto/AddPhoto";
 import {
   AlbumDate,
   AlbumField,
@@ -14,13 +16,21 @@ import staticIcon from "/img/camera-folder-static.png";
 import dynamicIcon from "/img/camera-folder.gif";
 
 const Album = () => {
+  const [modalActive, setModalActive] = useState<boolean>(false);
+
+  const handleModal = () => {
+    setModalActive(false);
+  };
   return (
     <Albums>
       <AlbumField>
-        <StaticIconBg className="static">
-          <StaticIcon className="static" src={staticIcon} />
-        </StaticIconBg>
-        <DynamicIcon className="active" src={dynamicIcon} />
+        <div onClick={() => setModalActive(true)}>
+          <StaticIconBg className="static">
+            <StaticIcon className="static" src={staticIcon} />
+          </StaticIconBg>
+          <DynamicIcon className="active" src={dynamicIcon} />
+        </div>
+        <AddPhoto active={modalActive} close={handleModal} />
         <Naming>
           <AlbumName>Hello World!</AlbumName>
           <AlbumLoc>Borshagovka, Kiev</AlbumLoc>

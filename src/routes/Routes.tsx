@@ -1,13 +1,19 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-
-import publicRoutes from "./publicRoutes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignIn from "../pages/signIn/SignInForm";
+import ProtectedRouter from "./ProtectedRouter";
+import protectedRoutes from "./protectedRoutes";
 
 export default function RoutesComp() {
   return (
     <BrowserRouter>
       <Routes>
-        {publicRoutes.map((route) => (
-          <Route path={route.path} element={route.element} key={route.path} />
+        <Route path={"/"} element={<SignIn />} />
+        {protectedRoutes.map((route) => (
+          <Route
+            path={route.path}
+            element={<ProtectedRouter>{route.element}</ProtectedRouter>}
+            key={route.path}
+          />
         ))}
       </Routes>
     </BrowserRouter>

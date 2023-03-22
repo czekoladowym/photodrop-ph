@@ -12,7 +12,7 @@ import {
 import logo from "/img/main-logo.svg";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 interface SignInFormData {
   login: string;
@@ -22,21 +22,25 @@ interface SignInFormData {
 const SignIn = () => {
   const [trueLogin, setTrueLogin] = useState<string>("");
   const [truePass, setTruePass] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault();
-    const res = await axios.post(
-      "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/sign-in",
-      {
-        login: trueLogin,
-        password: truePass,
-      }
-    );
-    if (res.status === 200) {
-      console.log(res.data);
-      window.location.replace("/home");
+    try {
+      const res = await axios.post(
+        "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/sign-in",
+        {
+          login: trueLogin,
+          password: truePass,
+        }
+      );
+      console.log(res.data.accessToken);
+      window.localStorage.setItem("token", res.data.accessToken);
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
     }
   };
 
