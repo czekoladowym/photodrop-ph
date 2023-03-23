@@ -2,7 +2,6 @@ import {
   Btn,
   Card,
   Desc,
-  Form,
   Input,
   InputDate,
   InputLoc,
@@ -11,23 +10,29 @@ import {
   Title,
 } from "./ModalAlbumStyles";
 import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Iprops {
   active: boolean;
-  close?: () => void;
+  close: () => void;
 }
 const baseUrl =
   "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/albums";
 
 const ModalAlbum = ({ active, close }: Iprops) => {
+  const [title, setTitle] = useState<string>("");
+  const [location, setLoc] = useState<string>("");
+  const [dataPicker, setDataPicker] = useState<string>("");
+
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
         baseUrl,
         {
-          title: "hey",
-          location: "Kiev",
-          dataPicker: "23.04.2003",
+          title,
+          location,
+          dataPicker,
         },
         {
           headers: {
@@ -35,7 +40,7 @@ const ModalAlbum = ({ active, close }: Iprops) => {
           },
         }
       );
-      console.log(res);
+      close();
     } catch (error) {
       console.log(error);
     }
@@ -51,13 +56,29 @@ const ModalAlbum = ({ active, close }: Iprops) => {
         <Desc>All fields required</Desc>
         <div>
           <InputName>Album Name:</InputName>
-          <Input placeholder="Enter album name..." />
+          <Input
+            placeholder="Enter album name..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required={true}
+          />
           <InputLoc>Album Location:</InputLoc>
-          <Input placeholder="Enter album location..." />
-          <InputDate>Album date:</InputDate>
-          <Input type="date" />
-          <button onClick={handleSubmit}>Test</button>
+          <Input
+            placeholder="Enter album location..."
+            value={location}
+            onChange={(e) => setLoc(e.target.value)}
+            required={true}
+          />
+          <InputDate>Who created this album:</InputDate>
+          <Input
+            type="text"
+            value={dataPicker}
+            placeholder={"Enter creator name..."}
+            onChange={(e) => setDataPicker(e.target.value)}
+            required={true}
+          />
         </div>
+        <Btn onClick={handleSubmit}>Create album</Btn>
       </Card>
     </Modal>
   );

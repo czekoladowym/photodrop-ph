@@ -48,7 +48,6 @@ export const Desc = styled.p`
 
 export const InputName = styled.p`
   font-weight: 500;
-  margin-right: 200px;
   margin-top: 40px;
 `;
 export const InputLoc = styled(InputName)`
@@ -57,7 +56,6 @@ export const InputLoc = styled(InputName)`
 `;
 
 export const InputDate = styled(InputName)`
-  margin-right: 210px;
   margin-top: 20px;
 `;
 
@@ -76,7 +74,7 @@ export const Input = styled.input`
   }
 `;
 
-export const Btn = styled.input`
+export const Btn = styled.button`
   border: 1px solid rgb(82 92 243);
   font-weight: 500;
   font-family: "Termina";
@@ -91,8 +89,4 @@ export const Btn = styled.input`
   :hover {
     background-color: rgb(44 44 44);
   }
-`;
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
 `;

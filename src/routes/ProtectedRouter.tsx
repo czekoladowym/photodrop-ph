@@ -9,7 +9,7 @@ const ProtectedRouter = ({ children }: IProps) => {
   const token = window.localStorage.getItem("token");
 
   if (!token) {
-    <Navigate to={"/"} />;
+    return <Navigate to={"/"} />;
   }
   return <>{children}</>;
 };

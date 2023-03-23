@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AddPhoto from "../addPhoto/AddPhoto";
+import AddPhoto from "../../pages/addPhoto/AddPhoto";
 import {
   AlbumDate,
   AlbumField,
