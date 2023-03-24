@@ -56,7 +56,7 @@ const Upload = () => {
           ref={filePicker}
           onChange={handleFile}
         />
-        <button onClick={handleUpload}>Upload</button>
+        {/* <button onClick={handleUpload}>Upload</button> */}
       </MainSection>
     </>
   );
