@@ -1,5 +1,6 @@
 import { useState } from "react";
-import AddPhoto from "../../pages/addPhoto/AddPhoto";
+import { Link } from "react-router-dom";
+import AddPhoto from "../../pages/upload/Upload";
 import {
   AlbumDate,
   AlbumField,
@@ -24,13 +25,12 @@ const Album = () => {
   return (
     <Albums>
       <AlbumField>
-        <div onClick={() => setModalActive(true)}>
+        <Link to={"/addPhoto"}>
           <StaticIconBg className="static">
             <StaticIcon className="static" src={staticIcon} />
           </StaticIconBg>
           <DynamicIcon className="active" src={dynamicIcon} />
-        </div>
-        <AddPhoto active={modalActive} close={handleModal} />
+        </Link>
         <Naming>
           <AlbumName>Hello World!</AlbumName>
           <AlbumLoc>Borshagovka, Kiev</AlbumLoc>

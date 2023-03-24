@@ -30,12 +30,14 @@ export const StaticIconBg = styled.div`
   background-color: #fff;
   justify-content: center;
   align-items: center;
+  user-select: none;
 `;
 export const StaticIcon = styled.img`
   cursor: pointer;
   height: 61px;
   width: 64px;
   background-color: #fff;
+  user-select: none;
 `;
 
 export const DynamicIcon = styled(StaticIcon)`
@@ -45,8 +47,7 @@ export const DynamicIcon = styled(StaticIcon)`
   width: 84px;
   height: 81px;
   left: 6.05px;
-  /* z-index: 3;
-  opacity: 0.4; */
+  user-select: none;
 `;
 
 export const Naming = styled.div`

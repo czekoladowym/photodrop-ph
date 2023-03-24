@@ -1,6 +1,7 @@
 import {
   Btn,
   Card,
+  Cross,
   Desc,
   Input,
   InputDate,
@@ -12,6 +13,7 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import cross from "/img/close_cross.svg";
 
 interface Iprops {
   active: boolean;
@@ -52,6 +54,7 @@ const ModalAlbum = ({ active, close }: Iprops) => {
   return (
     <Modal onClick={close}>
       <Card onClick={(e) => e.stopPropagation()}>
+        <Cross src={cross} onClick={close} />
         <Title>Create your album:</Title>
         <Desc>All fields required</Desc>
         <div>

@@ -6,6 +6,7 @@ export const Header = styled.div`
   justify-content: center;
   border-bottom: 1px solid #f1f0ec;
   position: relative;
+  user-select: none;
 `;
 export const Logo = styled.img`
   height: 28px;
@@ -25,6 +26,7 @@ export const AddAlbum = styled.div`
   -webkit-box-pack: center;
   flex-direction: column;
   justify-content: center;
+  user-select: none;
   :hover {
     background-color: rgb(247 244 244);
     transition: all 9ms cubic-bezier(1, -0.22, 0.1, 1.14) 0s;

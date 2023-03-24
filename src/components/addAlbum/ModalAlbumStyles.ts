@@ -23,6 +23,7 @@ export const Modal = styled.div`
 `;
 
 export const Card = styled.div`
+  position: relative;
   border: 1px solid #656565;
   border-radius: 30px;
   height: 540px;
@@ -35,7 +36,7 @@ export const Card = styled.div`
 
 export const Title = styled.h1`
   font-size: 25px;
-  margin-top: 40px;
+  margin-top: 50px;
 `;
 
 export const Desc = styled.p`
@@ -86,7 +87,17 @@ export const Btn = styled.button`
   width: 300px;
   margin-top: 50px;
   cursor: pointer;
+  user-select: none;
   :hover {
     background-color: rgb(44 44 44);
   }
+`;
+export const Cross = styled.img`
+  position: absolute;
+  height: 40px;
+  top: 0;
+  right: 0;
+  margin: 10px 10px 0 0;
+  cursor: pointer;
+  user-select: none;
 `;

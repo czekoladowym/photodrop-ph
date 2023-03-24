@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Header = styled.div`
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid #f1f0ec; ;
+  border-bottom: 1px solid #f1f0ec;
+  user-select: none;
 `;
 export const Logo = styled.img`
   margin: 19px auto;
