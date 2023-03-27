@@ -18,7 +18,9 @@ export const MainSection = styled.div`
   position: relative;
   margin: 30px 70px;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const FileInput = styled.input`
@@ -30,13 +32,29 @@ export const FileInput = styled.input`
   padding: 0;
   margin: 0;
 `;
+export const UploadSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+`;
 
 export const UploadBtn = styled.div`
-  background-color: violet;
-  height: 60px;
-  width: 300px;
-  border: 1px solid black;
-  border-radius: 20px;
+  display: flex;
+  background-color: #6561c6;
+  color: #fff;
+  font-size: 20px;
+  font-family: "Futura PT";
+  height: 50px;
+  width: 200px;
+  border: 1px solid #afafaf;
+  cursor: pointer;
+  border-radius: 23px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: #848484 1px 2px 7px;
+  :hover {
+    background: rgb(125 120 243);
+  }
 `;
 
 export const Back = styled.img`
@@ -45,4 +63,56 @@ export const Back = styled.img`
   top: 0;
   left: 0;
   margin: 15px 0 0 15px;
+`;
+
+export const PhotoSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+`;
+
+export const PreviewImg = styled.img`
+  user-select: none;
+  border-radius: 10px;
+  height: 150px;
+  margin: 10px;
+  width: auto;
+`;
+export const PreviewSection = styled.div`
+  position: relative;
+  &:hover .delete-button,
+  &:hover .rename-button {
+    visibility: visible; /* Show the buttons when the container is hovered */
+  }
+`;
+
+export const DeletePreview = styled.div`
+  visibility: hidden;
+  opacity: 1;
+  display: flex;
+  background-color: #efefefad;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+`;
+export const RenamePreview = styled.input`
+  position: absolute;
+  visibility: hidden;
+  opacity: 0.7;
+  top: 138px;
+  left: 10px;
+  width: calc(100% - 20px);
+  :focus {
+    opacity: 1;
+  }
 `;

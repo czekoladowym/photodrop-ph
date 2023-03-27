@@ -19,22 +19,6 @@ const baseUrl =
 const MainPage = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const getAllAlbums = async () => {
-    try {
-      const res: AxiosResponse = await axios.get(baseUrl, {
-        headers: {
-          Authorization: window.localStorage.getItem("token"),
-        },
-      });
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getAllAlbums();
-  });
   const handleModal = () => {
     setModalOpen(false);
   };

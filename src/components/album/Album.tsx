@@ -1,5 +1,7 @@
-import { useState } from "react";
+import axios, { AxiosResponse } from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AlbumData } from "../../interfaces/interfaces";
 import AddPhoto from "../../pages/upload/Upload";
 import {
   AlbumDate,
@@ -16,9 +18,26 @@ import {
 import staticIcon from "/img/camera-folder-static.png";
 import dynamicIcon from "/img/camera-folder.gif";
 
+const baseUrl =
+  "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/albums";
+
 const Album = () => {
+  const [album, setAlbum] = useState<AlbumData>();
   const [modalActive, setModalActive] = useState<boolean>(false);
 
+  const getAllAlbums = async () => {
+    try {
+      const res: AxiosResponse = await axios.get(baseUrl, {
+        headers: {
+          Authorization: window.localStorage.getItem("token"),
+        },
+      });
+      setAlbum(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(album);
   const handleModal = () => {
     setModalActive(false);
   };
