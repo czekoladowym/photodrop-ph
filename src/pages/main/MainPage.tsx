@@ -13,9 +13,6 @@ import { useEffect, useState } from "react";
 import ModalAlbum from "../../components/addAlbum/ModalAlbum";
 import axios, { AxiosResponse } from "axios";
 
-const baseUrl =
-  "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/albums";
-
 const MainPage = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 

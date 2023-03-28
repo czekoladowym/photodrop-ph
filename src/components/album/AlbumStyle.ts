@@ -79,3 +79,7 @@ export const AlbumDate = styled.p`
   right: 15px;
   bottom: 10px;
 `;
+export const Loading = styled.h1`
+  font-size: 30px;
+  margin: 30px;
+`;
