@@ -7,6 +7,7 @@ import {
   InputDate,
   InputLoc,
   InputName,
+  Loader,
   Modal,
   Title,
 } from "./ModalAlbumStyles";
@@ -14,6 +15,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import cross from "/img/close_cross.svg";
+import loader from "/img/ring-loader.svg";
 
 interface Iprops {
   active: boolean;
@@ -26,8 +28,16 @@ const ModalAlbum = ({ active, close }: Iprops) => {
   const [title, setTitle] = useState<string>("");
   const [location, setLoc] = useState<string>("");
   const [dataPicker, setDataPicker] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async () => {
+    if (!title || !location || !dataPicker) {
+      alert("Please fill in all required fields.");
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
     try {
       const res = await axios.post(
         baseUrl,
@@ -42,6 +52,7 @@ const ModalAlbum = ({ active, close }: Iprops) => {
           },
         }
       );
+      setLoading(false);
       close();
     } catch (error) {
       console.log(error);
@@ -81,10 +92,13 @@ const ModalAlbum = ({ active, close }: Iprops) => {
             required={true}
           />
         </div>
-        <Btn onClick={handleSubmit}>Create album</Btn>
+
+        <Btn onClick={handleSubmit}>
+          {loading ? <Loader src={loader} /> : <p>Create album</p>}
+        </Btn>
       </Card>
     </Modal>
   );
 };
-
+/* <Loader src={loader} /> */
 export default ModalAlbum;

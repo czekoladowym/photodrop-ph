@@ -38,7 +38,7 @@ export const UploadSection = styled.div`
   gap: 25px;
 `;
 
-export const UploadBtn = styled.div`
+export const UploadBtn = styled.button`
   display: flex;
   background-color: #6561c6;
   color: #fff;
@@ -54,6 +54,9 @@ export const UploadBtn = styled.div`
   box-shadow: #848484 1px 2px 7px;
   :hover {
     background: rgb(125 120 243);
+  }
+  :disabled {
+    background-color: rgb(160 156 255);
   }
 `;
 
@@ -115,4 +118,7 @@ export const RenamePreview = styled.input`
   :focus {
     opacity: 1;
   }
+`;
+export const Loader = styled.img`
+  height: 30px;
 `;

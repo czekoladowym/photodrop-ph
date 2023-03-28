@@ -83,8 +83,8 @@ export const Btn = styled.button`
   color: #fff;
   border-radius: 20px;
   background-color: black;
-  height: 65px;
-  width: 300px;
+  height: 60px;
+  width: 270px;
   margin-top: 50px;
   cursor: pointer;
   user-select: none;
@@ -100,4 +100,7 @@ export const Cross = styled.img`
   margin: 10px 10px 0 0;
   cursor: pointer;
   user-select: none;
+`;
+export const Loader = styled.img`
+  height: 30px;
 `;
