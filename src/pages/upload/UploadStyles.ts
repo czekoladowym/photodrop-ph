@@ -57,6 +57,7 @@ export const UploadBtn = styled.button`
   }
   :disabled {
     background-color: rgb(160 156 255);
+    cursor: wait;
   }
 `;
 

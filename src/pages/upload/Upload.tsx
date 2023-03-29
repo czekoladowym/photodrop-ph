@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { Link, useParams } from "react-router-dom";
 import {
   Back,
@@ -27,6 +28,7 @@ const Upload = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const filePicker = useRef<HTMLInputElement>(null);
   const uuid = useParams().id;
+
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
@@ -39,10 +41,15 @@ const Upload = () => {
 
         reader.onload = () => {
           const base64Image = reader.result as string;
+          const base64ImageWithoutPrefix = base64Image.replace(
+            /^data:image\/\w+;base64,/,
+            ""
+          );
+          const uniqueId = uuidv4();
           newImages.push({
             type: files[i].type,
             data: base64Image,
-            name: files[i].name,
+            name: uniqueId,
           });
 
           if (newImages.length === files.length) {
@@ -58,12 +65,21 @@ const Upload = () => {
 
   const postAllPhoto = async () => {
     setLoading(true);
+    const copyOfImg = [...images];
+    if (copyOfImg.length === 0) {
+      window.alert("Please select at least one image.");
+      setLoading(false);
+      return;
+    }
     try {
       const res: AxiosResponse = await axios.post(
         baseUrl,
         {
           albumId: uuid,
-          photos: images,
+          photos: copyOfImg.map((img) => {
+            img.data = img.data.replace(/^data:image\/\w+;base64,/, "");
+            return img;
+          }),
         },
         {
           headers: {
@@ -71,6 +87,9 @@ const Upload = () => {
           },
         }
       );
+      if (res.status === 200) {
+        window.alert("Upload successful!");
+      }
       setImages([]);
       setLoading(false);
     } catch (error) {
@@ -84,17 +103,12 @@ const Upload = () => {
     setImages(newImages);
   };
 
-  const handleRenameImage = (index: number, newName: string) => {
-    const newImages = [...images];
-    newImages[index].name = newName;
-    setImages(newImages);
-  };
-
   const handlePick = () => {
     if (filePicker.current) {
       filePicker.current.click();
     }
   };
+  console.log(images.map((image) => image.name));
 
   return (
     <>
@@ -115,7 +129,6 @@ const Upload = () => {
             multiple
             onChange={handleImageUpload}
           />
-
           <UploadBtn onClick={postAllPhoto} disabled={loading}>
             {loading ? <Loader src={loader} /> : "Upload"}
           </UploadBtn>
@@ -133,8 +146,8 @@ const Upload = () => {
               <RenamePreview
                 className="rename-button"
                 type="text"
-                defaultValue={image.name}
-                onBlur={(e: any) => handleRenameImage(index, e.target.value)}
+                value={image.name}
+                readOnly
               />
             </PreviewSection>
           ))}
