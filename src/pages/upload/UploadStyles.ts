@@ -88,8 +88,9 @@ export const PreviewImg = styled.img`
 export const PreviewSection = styled.div`
   position: relative;
   &:hover .delete-button,
-  &:hover .rename-button {
-    visibility: visible; /* Show the buttons when the container is hovered */
+  &:hover .rename-button,
+  &:hover .addPerson-button {
+    visibility: visible;
   }
 `;
 
@@ -101,10 +102,10 @@ export const DeletePreview = styled.div`
   height: 25px;
   width: 25px;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 13px;
   border-radius: 8px;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   cursor: pointer;
   user-select: none;
@@ -122,4 +123,22 @@ export const RenamePreview = styled.input`
 `;
 export const Loader = styled.img`
   height: 30px;
+`;
+export const AddPerson = styled.img`
+  left: 10;
+  visibility: hidden;
+  opacity: 1;
+  display: flex;
+  background-color: #efefefad;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  bottom: 16px;
+  left: 13px;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  padding: 2px;
 `;

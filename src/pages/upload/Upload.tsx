@@ -15,17 +15,27 @@ import {
   RenamePreview,
   UploadBtn,
   UploadSection,
+  AddPerson,
 } from "./UploadStyles";
 import logo from "/img/main-logo.svg";
 import arrowBack from "/img/arrow_back.svg";
 import axios, { AxiosResponse } from "axios";
 import loader from "/img/ring-loader.svg";
+import addPerson from "/img/addPerson.svg";
+import ModalPerson from "../../components/addPerson/ModalPerson";
+import { AboutUsers } from "../../interfaces/interfaces";
+
+interface IProps {
+  name: string;
+  type: string;
+  data: string;
+}
 
 const Upload = () => {
-  const [images, setImages] = useState<
-    { name: string; type: string; data: string }[]
-  >([]);
+  const [images, setImages] = useState<IProps[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   const filePicker = useRef<HTMLInputElement>(null);
   const uuid = useParams().id;
 
@@ -108,7 +118,10 @@ const Upload = () => {
       filePicker.current.click();
     }
   };
-  console.log(images.map((image) => image.name));
+
+  const handleModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -143,12 +156,12 @@ const Upload = () => {
                 &#10006;
               </DeletePreview>
               <PreviewImg src={image.data} />
-              <RenamePreview
-                className="rename-button"
-                type="text"
-                value={image.name}
-                readOnly
+              <AddPerson
+                className="addPerson-button"
+                src={addPerson}
+                onClick={() => setModalOpen(true)}
               />
+              <ModalPerson active={modalOpen} close={handleModal} />
             </PreviewSection>
           ))}
         </PhotoSection>
