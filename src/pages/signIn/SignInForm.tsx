@@ -36,7 +36,6 @@ const SignIn = () => {
           password: truePass,
         }
       );
-      console.log(res.data.accessToken);
       window.localStorage.setItem("token", res.data.accessToken);
       navigate("/home");
     } catch (error) {
@@ -51,9 +50,8 @@ const SignIn = () => {
       </Header>
       <MainSection>
         <MainTitle>Oh, we met again</MainTitle>
-        <Desc>* - required fields</Desc>
         <form onSubmit={handleFormSubmit}>
-          <SubTitle>*Login:</SubTitle>
+          <SubTitle>Login:</SubTitle>
           <RegInput
             type="text"
             placeholder="Enter your login..."
@@ -61,7 +59,7 @@ const SignIn = () => {
             onChange={(e) => setTrueLogin(e.target.value)}
             required={true}
           />
-          <SubTitle>*Password:</SubTitle>
+          <SubTitle>Password:</SubTitle>
           <RegInput
             type="password"
             placeholder="Enter your password..."
@@ -69,9 +67,7 @@ const SignIn = () => {
             onChange={(e) => setTruePass(e.target.value)}
             required={true}
           />
-          <SubmitBtn type="submit" onClick={() => console.log("hello world")}>
-            Sign In
-          </SubmitBtn>
+          <SubmitBtn type="submit">Sign In</SubmitBtn>
         </form>
       </MainSection>
     </>

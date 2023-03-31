@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { all } from "axios";
 import { useEffect, useState } from "react";
 import { AboutUsers } from "../../interfaces/interfaces";
 import {
@@ -18,36 +18,30 @@ import phoneNum from "/img/phone_number.svg";
 interface Iprops {
   active: boolean;
   close: () => void;
+  allInfo?: any;
 }
 
-const ModalPerson = ({ active, close }: Iprops) => {
+const ModalPerson = ({ active, close, allInfo }: Iprops) => {
+  const [users, setUsers] = useState(allInfo);
+  const [text, setText] = useState<string>("");
+  const [matchedUser, setMatchedUser] = useState<string[]>([]);
+
+  // const OnChangeHandler = (text: string) => {
+  //   let matches = [];
+  //   if (text.length > 0) {
+  //     matches = allInfo.filter((user: string) => {
+  //       const regex = new RegExp(`${text}`, "gi");
+  //       return user.match(regex);
+  //     });
+  //   }
+  //   setMatchedUser(matches);
+  //   console.log(matches);
+  //   setText(text);
+  // };
   const [number, setNumber] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [allNums, setAllNums] = useState<string[]>([]);
   const [display, setDisplay] = useState<boolean>(false);
-  const [allInfo, setAllInfo] = useState<AboutUsers[]>([]);
-
-  useEffect(() => {
-    const getAllNums = async () => {
-      try {
-        const res = await axios.get<AboutUsers[]>(
-          "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/users",
-          {
-            headers: {
-              Authorization: window.localStorage.getItem("token"),
-            },
-          }
-        );
-        setAllInfo(res.data);
-        const nums: string[] = [];
-        allInfo.map((num) => nums.push(num.phoneNumber));
-        setAllNums(nums);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAllNums();
-  }, []);
+  const [phoneMatch, setPhoneMatch] = useState<string[]>([]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -83,8 +77,8 @@ const ModalPerson = ({ active, close }: Iprops) => {
         </InputField>
         {display && (
           <AutoComplete>
-            {allInfo.map((info, i) => (
-              <CompleteNums key={i}>{info.phoneNumber}</CompleteNums>
+            {allInfo.map((item: string, i: number) => (
+              <CompleteNums key={i}>{item}</CompleteNums>
             ))}
           </AutoComplete>
         )}

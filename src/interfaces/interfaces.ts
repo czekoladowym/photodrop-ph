@@ -6,9 +6,5 @@ export interface AlbumData {
 }
 
 export interface AboutUsers {
-  personId: string;
-  email: string | null;
-  fullName: string | null;
   phoneNumber: string;
-  profilePhotoUrl: string | null;
 }

@@ -96,7 +96,8 @@ export const PhoneImg = styled.img`
   user-select: none;
 `;
 
-export const CompleteNums = styled.p`
+export const CompleteNums = styled.div`
+  font-family: "Futura PT";
   width: 100%;
   padding: 5px;
   cursor: pointer;

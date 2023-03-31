@@ -30,25 +30,28 @@ interface IProps {
   type: string;
   data: string;
 }
+const baseUrl =
+  "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/photos";
 
 const Upload = () => {
   const [images, setImages] = useState<IProps[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null
+  );
+  const [allInfo, setAllInfo] = useState<AboutUsers[]>([]);
 
   const filePicker = useRef<HTMLInputElement>(null);
   const uuid = useParams().id;
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-
     if (files) {
       const newImages: { data: string; name: string; type: string }[] = [];
-
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.readAsDataURL(files[i]);
-
         reader.onload = () => {
           const base64Image = reader.result as string;
           const base64ImageWithoutPrefix = base64Image.replace(
@@ -70,8 +73,21 @@ const Upload = () => {
     }
   };
 
-  const baseUrl =
-    "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/photos";
+  const getAllNums = async () => {
+    try {
+      const res = await axios.get<AboutUsers[]>(
+        "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/users",
+        {
+          headers: {
+            Authorization: window.localStorage.getItem("token"),
+          },
+        }
+      );
+      setAllInfo(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const postAllPhoto = async () => {
     setLoading(true);
@@ -120,7 +136,14 @@ const Upload = () => {
   };
 
   const handleModal = () => {
+    setSelectedImageIndex(null);
     setModalOpen(false);
+  };
+
+  const handlePickPerson = (index: number) => {
+    setSelectedImageIndex(index);
+    getAllNums();
+    setModalOpen(true);
   };
 
   return (
@@ -159,9 +182,13 @@ const Upload = () => {
               <AddPerson
                 className="addPerson-button"
                 src={addPerson}
-                onClick={() => setModalOpen(true)}
+                onClick={() => handlePickPerson(index)}
               />
-              <ModalPerson active={modalOpen} close={handleModal} />
+              <ModalPerson
+                active={modalOpen && selectedImageIndex === index}
+                close={handleModal}
+                allInfo={allInfo}
+              />
             </PreviewSection>
           ))}
         </PhotoSection>
