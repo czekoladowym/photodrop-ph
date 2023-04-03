@@ -57,7 +57,7 @@ export const NumInput = styled.input`
   border: 2px solid #6e6e6e;
   border-radius: 10px;
   height: 35px;
-  width: 200px;
+  width: 220px;
   font-size: 18px;
   padding: 10px;
   padding: 16px;
@@ -73,15 +73,16 @@ export const NumInput = styled.input`
 `;
 
 export const AutoComplete = styled.div`
-  margin-top: 15px;
   display: flex;
-  flex-flow: column wrap;
   align-items: center;
   text-align: center;
+  flex-direction: column;
   width: 200px;
   border: 1px solid rgb(213, 167, 255);
   box-shadow: rgb(213, 167, 255) 2px 2px 5px;
   border-radius: 10px;
+  overflow-y: auto;
+  max-height: 100px;
 `;
 
 export const InputField = styled.div`
@@ -106,4 +107,32 @@ export const CompleteNums = styled.div`
     border-radius: 10px;
     background-color: #e3e3e3;
   }
+`;
+
+export const ChoosenNums = styled.div`
+  margin-top: 10px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const ChoosenNum = styled.p`
+  cursor: pointer;
+  display: flex;
+  background: rgb(164, 164, 164);
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  margin: 0px 5px 4px;
+  border-radius: 7px;
+  padding: 3px;
+  align-items: center;
+  :hover {
+    background: rgb(124 124 124);
+  }
+`;
+
+export const NumDelete = styled.img`
+  margin-left: 4px;
+  height: 18px;
 `;
