@@ -142,3 +142,38 @@ export const AddPerson = styled.img`
   user-select: none;
   padding: 2px;
 `;
+
+export const SuccessMessage = styled.div`
+  font-size: 20px;
+  font-family: "Futura PT";
+  margin-top: 5px;
+  position: absolute;
+  padding: 11px;
+  border: 1px solid rgb(50, 122, 58);
+  background: rgba(168, 255, 92, 0.67);
+  width: 245px;
+  height: 54px;
+  border-radius: 10px;
+  text-align: end;
+  top: 0;
+  right: 12px;
+  animation: fadeOut 4s forwards;
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+`;
+export const SuccessBlock = styled.div`
+  border-radius: 10px 0px 0px 10px;
+  width: 18px;
+  height: 100%;
+  background: rgb(6 179 0);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+`;

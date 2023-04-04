@@ -16,6 +16,8 @@ import {
   UploadBtn,
   UploadSection,
   AddPerson,
+  SuccessMessage,
+  SuccessBlock,
 } from "./UploadStyles";
 import logo from "/img/main-logo.svg";
 import arrowBack from "/img/arrow_back.svg";
@@ -41,8 +43,10 @@ const Upload = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
+  const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
   const [allInfo, setAllInfo] = useState<AboutUsers[]>([]);
   const [selectedNumbers, setSelectedNumbers] = useState<string[]>([]);
+  const [successMessage] = useState<string>("Success upload!");
   const filePicker = useRef<HTMLInputElement>(null);
   const uuid = useParams().id;
 
@@ -125,7 +129,8 @@ const Upload = () => {
         }
       );
       if (res.status === 200) {
-        window.alert("Upload successful!");
+        setUploadSuccess(true);
+        setTimeout(() => setUploadSuccess(false), 4000);
       }
       setImages([]);
       setLoading(false);
@@ -160,6 +165,12 @@ const Upload = () => {
   return (
     <>
       <Header>
+        {uploadSuccess && (
+          <SuccessMessage>
+            <SuccessBlock></SuccessBlock>
+            {successMessage}
+          </SuccessMessage>
+        )}
         <Link to={"/home"}>
           <Back src={arrowBack} />
         </Link>
