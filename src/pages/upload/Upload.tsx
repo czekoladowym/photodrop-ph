@@ -50,7 +50,7 @@ const Upload = () => {
     images[index].usersPhoneNumbers = [...numbers];
   };
 
-  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
       const newImages: {
@@ -84,7 +84,6 @@ const Upload = () => {
     }
   };
 
-
   const getAllNums = async () => {
     try {
       const res = await axios.get<AboutUsers[]>(
@@ -115,7 +114,7 @@ const Upload = () => {
         {
           albumId: uuid,
           photos: copyOfImg.map((img) => {
-            img.data = img.data.replace(/^data:image\/\w+;base64,/, "");
+            img.data = img.data;
             return img;
           }),
         },
@@ -170,9 +169,10 @@ const Upload = () => {
       </Header>
       <MainSection>
         <UploadSection>
-          <UploadBtn onClick={handlePick}>Choose photo</UploadBtn>
+          <UploadBtn onClick={handlePick}>Choose photos</UploadBtn>
           <FileInput
             type="file"
+            accept="image/*"
             ref={filePicker}
             multiple
             onChange={handleImageUpload}
