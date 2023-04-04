@@ -25,30 +25,40 @@ import addPerson from "/img/addPerson.svg";
 import ModalPerson from "../../components/addPerson/ModalPerson";
 import { AboutUsers } from "../../interfaces/interfaces";
 
-interface IProps {
+interface IImage {
   name: string;
   type: string;
   data: string;
+  usersPhoneNumbers: string[];
 }
 const baseUrl =
   "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/photos";
 
 const Upload = () => {
-  const [images, setImages] = useState<IProps[]>([]);
+  const [images, setImages] = useState<IImage[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
   const [allInfo, setAllInfo] = useState<AboutUsers[]>([]);
-
+  const [selectedNumbers, setSelectedNumbers] = useState<string[]>([]);
   const filePicker = useRef<HTMLInputElement>(null);
   const uuid = useParams().id;
+
+  const handleAddSelectedNumbers = (index: number) => (numbers: string[]) => {
+    images[index].usersPhoneNumbers = [...numbers];
+  };
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      const newImages: { data: string; name: string; type: string }[] = [];
+      const newImages: {
+        data: string;
+        name: string;
+        type: string;
+        usersPhoneNumbers: string[];
+      }[] = [];
       for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.readAsDataURL(files[i]);
@@ -63,6 +73,7 @@ const Upload = () => {
             type: files[i].type,
             data: base64Image,
             name: uniqueId,
+            usersPhoneNumbers: selectedNumbers,
           });
 
           if (newImages.length === files.length) {
@@ -72,6 +83,7 @@ const Upload = () => {
       }
     }
   };
+
 
   const getAllNums = async () => {
     try {
@@ -170,6 +182,9 @@ const Upload = () => {
           </UploadBtn>
         </UploadSection>
         <PhotoSection>
+          {images.length === 0 && (
+            <h1 style={{ color: "#a0a0a0" }}>Please select a photo...</h1>
+          )}
           {images.map((image, index) => (
             <PreviewSection key={index}>
               <DeletePreview
@@ -188,6 +203,7 @@ const Upload = () => {
                 active={modalOpen && selectedImageIndex === index}
                 close={handleModal}
                 allInfo={allInfo}
+                onAddSelectedNumbers={handleAddSelectedNumbers(index)}
               />
             </PreviewSection>
           ))}

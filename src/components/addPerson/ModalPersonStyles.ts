@@ -73,16 +73,19 @@ export const NumInput = styled.input`
 `;
 
 export const AutoComplete = styled.div`
+  margin-top: 7px;
+  margin-right: 50px;
   display: flex;
+  -webkit-box-align: center;
   align-items: center;
   text-align: center;
   flex-direction: column;
-  width: 200px;
+  width: 220px;
   border: 1px solid rgb(213, 167, 255);
   box-shadow: rgb(213, 167, 255) 2px 2px 5px;
   border-radius: 10px;
   overflow-y: auto;
-  max-height: 100px;
+  max-height: 97px;
 `;
 
 export const InputField = styled.div`
@@ -104,7 +107,7 @@ export const CompleteNums = styled.div`
   cursor: pointer;
   border-bottom: 1px solid #e3e3e3;
   :hover {
-    border-radius: 10px;
+    border-radius: 10px 0 0 10px;
     background-color: #e3e3e3;
   }
 `;
@@ -127,12 +130,76 @@ export const ChoosenNum = styled.p`
   border-radius: 7px;
   padding: 3px;
   align-items: center;
+  user-select: none;
   :hover {
     background: rgb(124 124 124);
   }
 `;
 
 export const NumDelete = styled.img`
+  user-select: none;
   margin-left: 4px;
   height: 18px;
+`;
+
+export const AddPersonBtn = styled.button`
+  user-select: none;
+  border: 2px solid #6e6e6e;
+  border-radius: 10px;
+  height: 35.2px;
+  font-size: 17px;
+  box-shadow: 2px 2px 5px #d5a7ff;
+  cursor: pointer;
+  margin-left: 8px;
+  :hover {
+    background: rgb(231 226 226);
+  }
+`;
+
+export const ErrorMessage = styled.div`
+  font-family: "Futura PT";
+  margin-top: 5px;
+  position: relative;
+  padding: 11px;
+  border: 1px solid rgb(165 59 59);
+  background: rgb(255 193 193 / 67%);
+  width: 273px;
+  border-radius: 10px;
+  text-align: end;
+  animation: 0.7s show ease;
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+export const ErrorBlock = styled.div`
+  border-radius: 10px 0 0 10px;
+  width: 18px;
+  height: 100%;
+  background: #d60000;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+export const SaveNum = styled.button`
+  border: 1px solid rgb(82 92 243);
+  font-weight: 500;
+  font-family: "Termina";
+  font-size: 16px;
+  color: #fff;
+  border-radius: 20px;
+  background-color: black;
+  height: 60px;
+  width: 270px;
+  margin-top: 10px;
+  cursor: pointer;
+  user-select: none;
+  :hover {
+    background-color: rgb(44 44 44);
+  }
 `;

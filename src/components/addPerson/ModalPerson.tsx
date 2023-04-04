@@ -2,17 +2,21 @@ import axios, { all } from "axios";
 import { ChangeEventHandler, useEffect, useRef, useState } from "react";
 import { AboutUsers } from "../../interfaces/interfaces";
 import {
+  AddPersonBtn,
   AutoComplete,
   Card,
   ChoosenNum,
   ChoosenNums,
   CompleteNums,
   Cross,
+  ErrorBlock,
+  ErrorMessage,
   InputField,
   Modal,
   NumDelete,
   NumInput,
   PhoneImg,
+  SaveNum,
   Title,
 } from "./ModalPersonStyles";
 import cross from "/img/close_cross.svg";
@@ -23,9 +27,15 @@ interface Iprops {
   active: boolean;
   close: () => void;
   allInfo?: any;
+  onAddSelectedNumbers: (numbers: string[]) => void;
 }
 
-const ModalPerson = ({ active, close, allInfo }: Iprops) => {
+const ModalPerson = ({
+  active,
+  close,
+  allInfo,
+  onAddSelectedNumbers,
+}: Iprops) => {
   const [display, setDisplay] = useState<boolean>(false);
   const [options, setOptions] = useState<string[]>([]);
   const [search, setSearch] = useState<string>("");
@@ -54,74 +64,49 @@ const ModalPerson = ({ active, close, allInfo }: Iprops) => {
     return () => {
       window.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [wrapperRef, autoCompleteRef]);
+  }, [wrapperRef, autoCompleteRef, errorMessage]);
 
   const updateSearchValue = (value: string) => {
-    setSearch(formatPhoneValue(value));
+    setSearch(value);
     setDisplay(false);
   };
 
-  const handleBackSpace = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Backspace") return;
-    if (search.replace(/[^\d]/g, "").length === 8) {
-      setSearch(search.substring(6));
+  const handleAddPeople = () => {
+    if (choosenNum.length > 0) {
+      onAddSelectedNumbers(choosenNum);
+      close();
     }
-  };
-
-  const formatPhoneValue = (value: string) => {
-    if (!value) return "+";
-    const phoneNum = value.replace(/[^\d]/g, "");
-    const phoneNumLength = phoneNum.length;
-    if (phoneNumLength < 4) return `+${phoneNum}`;
-    if (phoneNumLength < 6) {
-      return `+${phoneNum.slice(0, 2)}(${phoneNum.slice(2, 6)})`;
-    }
-    if (phoneNumLength <= 8) {
-      return `+${phoneNum.slice(0, 2)}(${phoneNum.slice(
-        2,
-        5
-      )}) ${phoneNum.slice(5, 8)}`;
-    }
-    return `+${phoneNum.slice(0, 2)}(${phoneNum.slice(2, 5)})${phoneNum.slice(
-      5,
-      8
-    )}-${phoneNum.slice(8, 12)}`;
-  };
-
-  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
-    const formattedPhone = formatPhoneValue(e.currentTarget.value);
-    setSearch(formattedPhone);
   };
 
   const handleAddNumber = () => {
-    if (formatPhoneValue(search)) {
-      setChoosenNum([...choosenNum, search]);
-      setSearch("");
-    } else {
-      console.log("success", search.length);
-    }
-  };
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const numericValue = search.replace(/\D/g, "");
-    if (numericValue.length > 10) {
-      setErrorMessage("Phone number should have at most 10 digits");
+    if (search.length < 12) {
+      setErrorMessage("Phone number should have at least 12 digits.");
+    } else if (choosenNum.includes(search)) {
+      setErrorMessage("Phone number already added.");
     } else {
       setErrorMessage("");
-      const formattedValue =
-        "+ " + numericValue.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3");
-      setSearch(formattedValue);
+      setChoosenNum([...choosenNum, search]);
+      setSearch("");
     }
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = event.target.value.replace(/\D/g, "");
+    setSearch("+" + numericValue);
+  };
+
+  const handleDeleteNumber = (index: number) => {
+    const newNums = [...choosenNum];
+    newNums.splice(index, 1);
+    setChoosenNum(newNums);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      handleAddNumber();
-    }
-    if (event.key === "Backspace") {
-      const numericValue = search.replace(/[^\d]/g, "");
-      if (numericValue.length === 5 || numericValue.length === 4) {
-        event.preventDefault();
-        setSearch(formatPhoneValue(numericValue.slice(0, -1)));
+      if (search.length < 12) {
+        setErrorMessage("Phone number should have at least 12 digits.");
+      } else {
+        handleAddNumber();
       }
     }
   };
@@ -144,12 +129,14 @@ const ModalPerson = ({ active, close, allInfo }: Iprops) => {
           <InputField>
             <PhoneImg src={phoneNum} />
             <NumInput
+              maxLength={16}
               onClick={() => setDisplay(true)}
               placeholder="Enter person number..."
               value={search}
-              onChange={handleInput}
+              onChange={handleChange}
               onKeyDown={handleKeyDown}
             />
+            <AddPersonBtn onClick={handleAddNumber}>Add</AddPersonBtn>
           </InputField>
           {display && (
             <AutoComplete ref={autoCompleteRef}>
@@ -157,9 +144,7 @@ const ModalPerson = ({ active, close, allInfo }: Iprops) => {
                 .filter((option: string) =>
                   option
                     .toLocaleLowerCase()
-                    .startsWith(
-                      search.toLocaleLowerCase().replaceAll(/[() -]/g, "")
-                    )
+                    .startsWith(search.toLocaleLowerCase())
                 )
                 .map((value, i) => {
                   return (
@@ -168,20 +153,26 @@ const ModalPerson = ({ active, close, allInfo }: Iprops) => {
                       key={i}
                       tabIndex={0}
                     >
-                      {formatPhoneValue(value)}
+                      {value}
                     </CompleteNums>
                   );
                 })}
             </AutoComplete>
           )}
-          {errorMessage && <div>{errorMessage}</div>}
+          {errorMessage && (
+            <ErrorMessage>
+              <ErrorBlock></ErrorBlock>
+              {errorMessage}
+            </ErrorMessage>
+          )}
           <ChoosenNums>
             {choosenNum.map((num, i) => (
-              <ChoosenNum key={i}>
+              <ChoosenNum key={i} onClick={() => handleDeleteNumber(i)}>
                 {num} <NumDelete src={cancel} />
               </ChoosenNum>
             ))}
           </ChoosenNums>
+          <SaveNum onClick={handleAddPeople}>Save selected numbers</SaveNum>
         </Card>
       </div>
     </Modal>
