@@ -81,3 +81,6 @@ export const SubmitBtn = styled.button`
     transition: 0.3s;
   }
 `;
+export const Loader = styled.img`
+  height: 30px;
+`;

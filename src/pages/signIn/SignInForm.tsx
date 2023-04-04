@@ -8,11 +8,13 @@ import {
   NonRequired,
   SubmitBtn,
   Desc,
+  Loader,
 } from "./SignInStyles";
 import logo from "/img/main-logo.svg";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { redirect, useNavigate } from "react-router-dom";
+import loader from "/img/ring-loader.svg";
 
 interface SignInFormData {
   login: string;
@@ -22,12 +24,14 @@ interface SignInFormData {
 const SignIn = () => {
   const [trueLogin, setTrueLogin] = useState<string>("");
   const [truePass, setTruePass] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleFormSubmit = async (
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post(
         "https://1fhuccr2jh.execute-api.us-east-1.amazonaws.com/dev/sign-in",
@@ -36,6 +40,7 @@ const SignIn = () => {
           password: truePass,
         }
       );
+      setLoading(false);
       window.localStorage.setItem("token", res.data.accessToken);
       navigate("/home");
     } catch (error) {
@@ -67,7 +72,9 @@ const SignIn = () => {
             onChange={(e) => setTruePass(e.target.value)}
             required={true}
           />
-          <SubmitBtn type="submit">Sign In</SubmitBtn>
+          <SubmitBtn type="submit">
+            {loading ? <Loader src={loader} /> : <p>Sign In</p>}
+          </SubmitBtn>
         </form>
       </MainSection>
     </>
